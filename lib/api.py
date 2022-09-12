@@ -10,7 +10,7 @@ templates = Jinja2Templates(directory='static/html')
 # login
 @app.get('/login', response_class=HTMLResponse)
 def get_login():                        # pass error as query parameter and use Jinja to change elements or just in URL & use javascript to 
-    FileResponse('static/html/login.html')
+    return FileResponse('static/html/login.html')
 
 @app.post('/login', response_class=RedirectResponse)
 def post_login(number: int, password: str) -> RedirectResponse:
@@ -18,12 +18,12 @@ def post_login(number: int, password: str) -> RedirectResponse:
         user_id = db.get_user_id(number)
         return RedirectResponse(f'/chats/{user_id}', HTTPException(status.HTTP_302_FOUND))  # f strings or no f strings
     else:
-        RedirectResponse("/login?error=True", status_code=HTTPException(status.HTTP_302_FOUND))
+        return RedirectResponse("/login?error=True", status_code=HTTPException(status.HTTP_302_FOUND))
 
 # sign-up
 @app.get('/sign-up', response_class=HTMLResponse)
 def get_sign_up():
-    raise HTTPException(status.HTTP_501_NOT_IMPLEMENTED)
+    return FileResponse('static/html/sign-up.html')
 
 @app.post('/sign-up', response_class=RedirectResponse)
 def post_sign_up(name: int, number: int, password: str):
@@ -32,17 +32,17 @@ def post_sign_up(name: int, number: int, password: str):
         user_id = db.get_user_id(number)
         return RedirectResponse(f'/chats/{user_id}', HTTPException(status.HTTP_302_FOUND))
     else:
-        RedirectResponse("/sign-up?error=True", status_code=HTTPException(status.HTTP_302_FOUND))
+        return RedirectResponse("/sign-up?error=True", status_code=HTTPException(status.HTTP_302_FOUND))
     
 # chats
 @app.get('/chats/{user_id}', response_class=HTMLResponse)
 def get_chats(user_id: int):
-    templates.TemplateResponse("chats.html", {"request": {}, "chats": db.get_chats(user_id)})
+    return templates.TemplateResponse("chats.html", {"request": {}, "chats": db.get_chats(user_id)})
 
 # contacts
 @app.get('/contacts/{user_id}', response_class=HTMLResponse)
 def get_contacts(user_id: int):
-    templates.TemplateResponse("contacts.html", {"request": {}, "chats": db.get_contacts(user_id)})
+    return templates.TemplateResponse("contacts.html", {"request": {}, "chats": db.get_contacts(user_id)})
 
 # add contact
 @app.get('/add-contacts/{user_id}', response_class=HTMLResponse)
