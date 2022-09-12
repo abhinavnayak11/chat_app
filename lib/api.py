@@ -10,7 +10,7 @@ templates = Jinja2Templates(directory='static/html')
 # login
 @app.get('/login', response_class=HTMLResponse)
 def get_login():                        # pass error as query parameter and use Jinja to change elements or just in URL & use javascript to 
-    return FileResponse('static/html/login.html')
+    return templates.TemplateResponse('login.html', {'request':{}})
 
 @app.post('/login', response_class=RedirectResponse)
 def post_login(number: int, password: str) -> RedirectResponse:
@@ -23,7 +23,7 @@ def post_login(number: int, password: str) -> RedirectResponse:
 # sign-up
 @app.get('/sign-up', response_class=HTMLResponse)
 def get_sign_up():
-    return FileResponse('static/html/sign-up.html')
+    return templates.TemplateResponse('sign-up.html', {'request':{}})
 
 @app.post('/sign-up', response_class=RedirectResponse)
 def post_sign_up(name: int, number: int, password: str):
@@ -47,7 +47,7 @@ def get_contacts(user_id: int):
 # add contact
 @app.get('/add-contacts/{user_id}', response_class=HTMLResponse)
 def get_add_contact(user_id: int):
-    return FileResponse('static/html/add_contact.html')
+    return templates.TemplateResponse('add_contact.html', {'request':{}})
 
 @app.post('/add-contacts/{user_id}', response_class=RedirectResponse)
 def get_add_contact(user_id: int, name: str, contact_number: int):
