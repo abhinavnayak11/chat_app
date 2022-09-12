@@ -1,0 +1,31 @@
+html, body {
+    display: inline;
+    margin: 0 auto;
+    vertical-align: middle;
+    height: 100%;
+}
+.login-form-wrap {
+    background-color: beige;
+    width: min-content;
+    height: min-content;
+    overflow: hidden;
+    /* vertical-align: middle; */
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 40px;
+}
+
+h2 {
+    color: #0a75ad;
+}
+
+.login-form-start {
+    line-height: 10%;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+  
+}
+.member{
+    display: inline-block;
+}
