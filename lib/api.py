@@ -1,11 +1,13 @@
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import FileResponse, RedirectResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 from . import db
 
 app = FastAPI()
 templates = Jinja2Templates(directory='static/html')
+app.mount("/css", StaticFiles(directory="static/css"), name="css")
 
 # login
 @app.get('/login', response_class=HTMLResponse)
