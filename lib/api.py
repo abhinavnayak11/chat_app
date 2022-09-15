@@ -76,7 +76,6 @@ def get_chat_message(user_id: int, user_contact_id: int):
 # check this
 @app.post('/send-message', response_class=RedirectResponse)
 def post_chat_message(user_id: int, user_contact_id: int, message: str, message_timestamp: str):
-    print("works")
     db.insert_chat_message(user_id, user_contact_id, message, message_timestamp)
 
 
