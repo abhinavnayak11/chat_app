@@ -9,6 +9,8 @@ app = FastAPI(default_response_class=JSONResponse)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory='static/html')
 app.mount("/css", StaticFiles(directory="static/css"), name="css")
+app.mount("/images", StaticFiles(directory="static/images"), name="images")
+app.mount("/js", StaticFiles(directory="static/js"), name="js")
 
 conn = db.get_conn(db.DB_PATH)
 db.create_table(conn)
